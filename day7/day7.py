@@ -43,14 +43,14 @@ def part_2():
 
     def count_sub_bags(n, bag):
         if bags[bag] == {('no', 'otherbags.')}:
-            return 1
+            return 0
         
-        count = 1
+        count = 0
         for sub_n, sub_bag in bags[bag]:
-            count += int(sub_n) * count_sub_bags(sub_n, sub_bag)
+            count += int(sub_n) * (1 + count_sub_bags(sub_n, sub_bag))
 
         return count
-    return count_sub_bags(1, "shinygold") - 1
+    return count_sub_bags(1, "shinygold")
 
 print("Part 1: " + str(part_1()))
 print("Part 2: " + str(part_2()))
