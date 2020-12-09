@@ -18,6 +18,7 @@ def eval(index, acc, instruction, value):
 def part_1():
     visited_indexes = set()
     index, acc = 0, 0
+    
     while index not in visited_indexes:
         visited_indexes.add(index)
         index, acc = eval(index, acc, instructions[index][0], instructions[index][1])
@@ -37,6 +38,7 @@ def part_2():
         instructions[i] = change_instruction(instructions[i]) 
         visited_indexes = set()
         index, acc = 0, 0
+        
         while index not in visited_indexes:
             visited_indexes.add(index)
             index, acc = eval(index, acc, instructions[index][0], instructions[index][1])
