@@ -3,12 +3,14 @@ from collections import defaultdict
 with open("day10/input.txt") as file:
     adapters = [int(line) for line in file.read().split('\n')]
 
+
 def part_1(adapters):
     adapters.sort()
     adapters = [0] + adapters + [adapters[-1] + 3]
     adapter_gaps = [adapters[i] - adapters[i-1] for i in range(1, len(adapters))]
     gap_counts = dict((x,adapter_gaps.count(x)) for x in set(adapter_gaps))
     return (gap_counts[1] * gap_counts[3])
+
 
 class Graph: 
     def __init__(self): 
@@ -55,4 +57,4 @@ def part_2(adapters):
     return g.count_paths(adapters[0], adapters[-1])
 
 print ("Part 1: " + str(part_1(adapters)))
-print("Part 2: " + str(part_2(adapters)))
+print ("Part 2: " + str(part_2(adapters)))
