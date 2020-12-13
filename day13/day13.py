@@ -3,10 +3,6 @@ with open("day13/input.txt") as file:
     target = int(file.readline().rsplit()[0])
     times = set([int(x) for x in file.read().split(',') if x != 'x'])
 
-print(target)
-print (times)
-
-
 current_time = target
 
 def get_factors(n):
@@ -24,6 +20,4 @@ while True:
         break
     current_time += 1
 
-print (time, current_time)
-
-print((current_time - target) * time)
+print("Part 1: " + str((current_time - target) * time))
