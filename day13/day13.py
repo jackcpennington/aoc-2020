@@ -1,3 +1,4 @@
+import math
 with open("day13/input.txt") as file:
     target = int(file.readline().rsplit()[0])
     times = set([int(x) for x in file.read().split(',') if x != 'x'])
@@ -10,7 +11,7 @@ current_time = target
 
 def get_factors(n):
     factors = set()
-    for i in range(1, n + 1):
+    for i in range(1, math.ceil(n/2)):
        if n % i == 0:
            factors.add(i)
     return factors
