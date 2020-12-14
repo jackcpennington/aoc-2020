@@ -4,9 +4,9 @@ with open("day14/input.txt") as file:
 mask_indexes = [lines.index(line) for line in lines if "".join(list(line)[:4]) == "mask"]
 groups = []
 for i in range(1,len(mask_indexes)):
-    print (i)
     groups.append(lines[mask_indexes[i-1]:mask_indexes[i]])
 groups.append(lines[mask_indexes[-1]:])
+
 
 def get_binary_values(lines):
     binary_values = []
@@ -19,6 +19,7 @@ def get_binary_values(lines):
         binary_values.append((address, value))
 
     return binary_values
+
 
 def apply_mask(mask, value):
     value = list(value)
