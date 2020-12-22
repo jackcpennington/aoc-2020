@@ -1,3 +1,6 @@
+
+import itertools
+
 with open("day14/input.txt") as file:
     lines = file.read().split('\n')
 
@@ -36,8 +39,51 @@ for group in groups:
     mask = group[0].split()[-1]
     for address, b_value in get_binary_values(group[1:]):
         result = apply_mask(mask, b_value)
-        
+
         memory[address] = int(result, 2)
 
-print (memory)
+# print (memory)
+print(sum(memory.values()))
+
+
+def get_b_address_addresses(mask, address):
+    address = list(address)
+    for i, bit in enumerate(mask):
+        if bit == '1' or bit == 'X':
+            address[i] = bit
+    
+    return "".join(address)
+
+
+def get_b_address_value(lines):
+    items = []
+    for line in lines:
+        line = line.split()
+        value = int(line[-1])
+        address = int("".join(list(line[0])[4:-1]))
+        address = '{:036b}'.format(address)
+        items.append((address, value))
+    return items
+    
+def floating(addr):
+    xs = addr.count("X")
+    addrs = []
+    for i in itertools.product([0,1], repeat=xs):
+        new_addr = addr[:]
+        for char in i:
+            new_addr = new_addr.replace("X", str(char), 1)
+        addrs.append(new_addr)
+    return addrs
+
+
+memory = dict()
+for group in groups:
+    mask = group[0].split()[-1]
+    for address, value in get_b_address_value(group[1:]):
+        add = get_b_address_addresses(mask, address)
+        pos_add = floating(add)
+        for addr in pos_add:
+            memory[addr] = value
+
+# print (memory)
 print(sum(memory.values()))
